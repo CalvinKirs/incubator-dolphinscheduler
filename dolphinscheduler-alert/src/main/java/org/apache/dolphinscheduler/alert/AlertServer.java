@@ -87,8 +87,7 @@ public class AlertServer {
 
     }
 
-    private void initPlugin() {
-        alertPluginManager = new AlertPluginManager();
+    private void initPlugin() {alertPluginManager = new AlertPluginManager();
         alertPluginManagerConfig = new DolphinPluginManagerConfig();
         alertPluginManagerConfig.setPlugins(PropertyUtils.getString(ALERT_PLUGIN_BINDING));
         if (StringUtils.isNotBlank(PropertyUtils.getString(ALERT_PLUGIN_DIR))) {
