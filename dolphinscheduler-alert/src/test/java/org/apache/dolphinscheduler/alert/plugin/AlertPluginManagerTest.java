@@ -33,7 +33,7 @@ import com.google.common.collect.ImmutableList;
 /**
  * AlertPluginManager Tester.
  */
-@Ignore
+
 public class AlertPluginManagerTest {
 
     private static final Logger logger = LoggerFactory.getLogger(AlertPluginManagerTest.class);
@@ -60,6 +60,6 @@ public class AlertPluginManagerTest {
             throw new RuntimeException("load Alert Plugin Failed !", e);
         }
 
-        Assert.assertNotNull(alertPluginManager.getAlertChannelFactoryMap().get("email alert"));
+        Assert.assertNotNull(alertPluginManager.getAlertChannelFactoryMap().get("Email"));
     }
 }

@@ -353,7 +353,6 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.connector.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
@@ -517,6 +516,15 @@
                 <version>${jcip.version}</version>
                 <optional>true</optional>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/oracle/oracle-jdbc -->
+
+            <!-- https://mvnrepository.com/artifact/oracle/oracle-jdbc -->
+            <dependency>
+                <groupId>oracle</groupId>
+                <artifactId>oracle-jdbc</artifactId>
+                <version>12.1.0.1.0</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -563,21 +571,21 @@
                 <groupId>org.sonatype.aether</groupId>
                 <artifactId>aether-api</artifactId>
                 <version>1.13.1</version>
-                <scope>provided</scope>
+
             </dependency>
 
             <dependency>
                 <groupId>io.airlift.resolver</groupId>
                 <artifactId>resolver</artifactId>
                 <version>1.5</version>
-                <scope>provided</scope>
+
             </dependency>
 
             <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm</artifactId>
                 <version>6.2.1</version>
-                <scope>provided</scope>
+
             </dependency>
 
             <dependency>
@@ -691,6 +699,51 @@
                 <!--<allowedProvidedDependency>org.apache.dolphinscheduler:dolphinscheduler-common</allowedProvidedDependency>-->
                 <!--</allowedProvidedDependencies>-->
                 <!--</configuration>-->
+            </plugin>
+            <plugin>
+            <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+            <version>0.13</version>
+            <configuration>
+                <excludeSubProjects>false</excludeSubProjects>
+                <addDefaultLicenseMatchers>false</addDefaultLicenseMatchers>
+                <licenses>
+                    <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
+                        <licenseFamilyCategory>AL20</licenseFamilyCategory>
+                        <licenseFamilyName>Apache License, 2.0</licenseFamilyName>
+                        <patterns>
+                            <pattern>Licensed to the Apache Software Foundation (ASF)</pattern>
+                        </patterns>
+                    </license>
+                </licenses>
+                <licenseFamilies>
+                    <licenseFamily implementation="org.apache.rat.license.SimpleLicenseFamily">
+                        <familyName>Apache License, 2.0</familyName>
+                    </licenseFamily>
+                </licenseFamilies>
+                <excludes>
+                    <exclude>**/node_modules/**</exclude>
+                    <exclude>**/node/**</exclude>
+                    <exclude>**/dist/**</exclude>
+                    <exclude>**/licenses/**</exclude>
+                    <exclude>.github/**</exclude>
+                    <exclude>**/sql/soft_version</exclude>
+                    <exclude>**/common/utils/ScriptRunner.java</exclude>
+                    <exclude>**/*.json</exclude>
+                    <exclude>**/*.iml</exclude>
+                    <exclude>**/*.yaml</exclude>
+                    <!-- document files -->
+                    <exclude>**/*.md</exclude>
+                    <excldue>**/*.MD</excldue>
+                    <exclude>**/*.txt</exclude>
+                    <exclude>**/docs/**</exclude>
+                    <exclude>**/*.babelrc</exclude>
+                    <exclude>**/*.eslint*</exclude>
+                    <exclude>**/.mvn/jvm.config</exclude>
+                    <exclude>**/.mvn/wrapper/**</exclude>
+                </excludes>
+                <consoleOutput>true</consoleOutput>
+            </configuration>
             </plugin>
 
             <plugin>

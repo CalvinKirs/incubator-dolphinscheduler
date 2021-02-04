@@ -28,7 +28,6 @@ import com.google.common.collect.ImmutableList;
 /**
  * DolphinPluginLoader Tester.
  */
-@Ignore
 public class DolphinPluginLoaderTest {
 
     @Before
@@ -55,6 +54,6 @@ public class DolphinPluginLoaderTest {
             throw new RuntimeException("load Alert Plugin Failed !", e);
         }
 
-        Assert.assertNotNull(alertPluginManager.getAlertChannelFactoryMap().get("email alert"));
+        Assert.assertNotNull(alertPluginManager.getAlertChannelFactoryMap().get("Email"));
     }
 }
