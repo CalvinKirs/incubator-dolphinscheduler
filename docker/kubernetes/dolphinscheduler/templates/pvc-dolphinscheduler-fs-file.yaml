@@ -14,22 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+{{- if .Values.common.fsFileResourcePersistence.enabled }}
 apiVersion: v1
-kind: Service
+kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "dolphinscheduler.fullname" . }}-frontend
+  name: {{ include "dolphinscheduler.fullname" . }}-fs-file
   labels:
-    app.kubernetes.io/name: {{ include "dolphinscheduler.fullname" . }}-frontend
+    app.kubernetes.io/name: {{ include "dolphinscheduler.fullname" . }}-fs-file
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    "helm.sh/resource-policy": keep
 spec:
-  ports:
-    - port: 8888
-      targetPort: tcp-port
-      protocol: TCP
-      name: tcp-port
-  selector:
-    app.kubernetes.io/name: {{ include "dolphinscheduler.fullname" . }}-frontend
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/component: frontend
+  accessModes:
+  {{- range .Values.common.fsFileResourcePersistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  storageClassName: {{ .Values.common.fsFileResourcePersistence.storageClassName | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.common.fsFileResourcePersistence.storage | quote }}
+{{- end }}

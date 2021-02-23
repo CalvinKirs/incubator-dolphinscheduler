@@ -14,22 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-{{- if .Values.frontend.persistentVolumeClaim.enabled }}
+{{- if .Values.api.configmap }}
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: ConfigMap
 metadata:
-  name: {{ include "dolphinscheduler.fullname" . }}-frontend
+  name: {{ include "dolphinscheduler.fullname" . }}-api
   labels:
-    app.kubernetes.io/name: {{ include "dolphinscheduler.fullname" . }}-frontend
+    app.kubernetes.io/name: {{ include "dolphinscheduler.fullname" . }}-api
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-spec:
-  accessModes:
-    {{- range .Values.frontend.persistentVolumeClaim.accessModes }}
-    - {{ . | quote }}
-  {{- end }}
-  storageClassName: {{ .Values.frontend.persistentVolumeClaim.storageClassName | quote }}
-  resources:
-    requests:
-      storage: {{ .Values.frontend.persistentVolumeClaim.storage | quote }}
+data:
+  DOLPHINSCHEDULER_OPTS: {{ .Values.api.configmap.DOLPHINSCHEDULER_OPTS | quote }}
 {{- end }}
