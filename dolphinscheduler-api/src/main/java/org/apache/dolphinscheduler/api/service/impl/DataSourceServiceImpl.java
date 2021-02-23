@@ -94,10 +94,10 @@ public class DataSourceServiceImpl extends BaseServiceImpl implements DataSource
 
         Result<Object> result = new Result<>();
         // check name can use or not
-        if (checkName(name)) {
+       /* if (checkName(name)) {
             putMsg(result, Status.DATASOURCE_EXIST);
             return result;
-        }
+        }*/
         Result<Object> isConnection = checkConnection(type, parameter);
         if (Status.SUCCESS.getCode() != isConnection.getCode()) {
             return result;

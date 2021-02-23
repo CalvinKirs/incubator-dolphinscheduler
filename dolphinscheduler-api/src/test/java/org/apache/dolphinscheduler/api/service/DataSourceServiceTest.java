@@ -87,7 +87,7 @@ public class DataSourceServiceTest {
 
         // data source exits
         PowerMockito.when(dataSourceMapper.queryDataSourceByName(dataSourceName.trim())).thenReturn(null);
-        Result connectionResult = new Result(Status.DATASOURCE_CONNECT_FAILED.getCode(),Status.DATASOURCE_CONNECT_FAILED.getMsg());
+        Result connectionResult = new Result(Status.DATASOURCE_CONNECT_FAILED.getCode(), Status.DATASOURCE_CONNECT_FAILED.getMsg());
         //PowerMockito.when(dataSourceService.checkConnection(dataSourceType, parameter)).thenReturn(connectionResult);
         PowerMockito.doReturn(connectionResult).when(dataSourceService).checkConnection(dataSourceType, parameter);
         Result connectFailedResult = dataSourceService.createDataSource(loginUser, dataSourceName, dataSourceDesc, dataSourceType, parameter);
@@ -95,7 +95,7 @@ public class DataSourceServiceTest {
 
         // data source exits
         PowerMockito.when(dataSourceMapper.queryDataSourceByName(dataSourceName.trim())).thenReturn(null);
-        connectionResult = new Result(Status.SUCCESS.getCode(),Status.SUCCESS.getMsg());
+        connectionResult = new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMsg());
         PowerMockito.when(dataSourceService.checkConnection(dataSourceType, parameter)).thenReturn(connectionResult);
         PowerMockito.when(DataSourceFactory.getDatasource(dataSourceType, parameter)).thenReturn(null);
         Result notValidError = dataSourceService.createDataSource(loginUser, dataSourceName, dataSourceDesc, dataSourceType, parameter);
@@ -141,7 +141,7 @@ public class DataSourceServiceTest {
         // data source connect failed
         PowerMockito.when(dataSourceMapper.selectById(dataSourceId)).thenReturn(dataSource);
         PowerMockito.when(dataSourceMapper.queryDataSourceByName(dataSourceName)).thenReturn(null);
-        Result connectionResult = new Result(Status.SUCCESS.getCode(),Status.SUCCESS.getMsg());
+        Result connectionResult = new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMsg());
         PowerMockito.when(dataSourceService.checkConnection(dataSourceType, parameter)).thenReturn(connectionResult);
         Result connectFailed = dataSourceService.updateDataSource(dataSourceId, loginUser, dataSourceName, dataSourceDesc, dataSourceType, parameter);
         Assert.assertEquals(Status.DATASOURCE_CONNECT_FAILED.getCode(), connectFailed.getCode().intValue());
@@ -149,7 +149,7 @@ public class DataSourceServiceTest {
         //success
         PowerMockito.when(dataSourceMapper.selectById(dataSourceId)).thenReturn(dataSource);
         PowerMockito.when(dataSourceMapper.queryDataSourceByName(dataSourceName)).thenReturn(null);
-        connectionResult = new Result(Status.DATASOURCE_CONNECT_FAILED.getCode(),Status.DATASOURCE_CONNECT_FAILED.getMsg());
+        connectionResult = new Result(Status.DATASOURCE_CONNECT_FAILED.getCode(), Status.DATASOURCE_CONNECT_FAILED.getMsg());
         PowerMockito.when(dataSourceService.checkConnection(dataSourceType, parameter)).thenReturn(connectionResult);
         Result success = dataSourceService.updateDataSource(dataSourceId, loginUser, dataSourceName, dataSourceDesc, dataSourceType, parameter);
         Assert.assertEquals(Status.SUCCESS.getCode(), success.getCode().intValue());
@@ -171,7 +171,7 @@ public class DataSourceServiceTest {
         int dataSourceId = -1;
         PowerMockito.when(dataSourceMapper.selectById(dataSourceId)).thenReturn(null);
         Result result = dataSourceService.connectionTest(dataSourceId);
-        Assert.assertEquals(Status.RESOURCE_NOT_EXIST.getCode(),result.getCode().intValue());
+        Assert.assertEquals(Status.RESOURCE_NOT_EXIST.getCode(), result.getCode().intValue());
     }
 
     @Test
@@ -328,7 +328,6 @@ public class DataSourceServiceTest {
 
     /**
      * test check connection
-     * @throws Exception
      */
     @Test
     public void testCheckConnection() throws Exception {

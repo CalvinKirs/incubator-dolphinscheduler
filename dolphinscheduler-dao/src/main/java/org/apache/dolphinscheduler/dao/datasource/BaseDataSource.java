@@ -143,6 +143,7 @@ public abstract class BaseDataSource {
      */
     private void appendOther(StringBuilder jdbcUrl) {
         String otherParams = filterOther(getOther());
+        System.out.println("XXXXXXXX    +"+otherParams);
         if (StringUtils.isNotEmpty(otherParams)) {
             String separator = "";
             switch (dbTypeSelector()) {
